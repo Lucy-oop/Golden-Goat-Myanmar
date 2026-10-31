@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-700: #8a6420;
+  --color-gold-600: #a87a2a;
+  --color-gold-400: #d4ab52;
+  --color-gold-200: #e9c977;
+  --color-cream: #fbf6ec;
+  --color-sand: #f2e8d5;
+  --color-volcanic: #231a12;
+  --color-volcanic-800: #33261b;
+  --color-tamarind: #6b3e1f;
+  --color-leaf: #3f6b35;
+  --color-ink: #2a2118;
+  --color-muted: #6f6253;
+
+  /* CJK and Burmese fall through to these per glyph. */
+  --font-display: var(--font-fraunces), "Songti SC", "Noto Serif SC", "STSong", var(--font-noto-myanmar), Georgia, serif;
+  --font-sans: var(--font-manrope), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", var(--font-noto-myanmar), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(100deg, #a87a2a 0%, #e9c977 45%, #b8862b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(100deg, #a87a2a 0%, #d4ab52 50%, #a87a2a 100%);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+.reveal-left {
+  transform: translateX(-60px);
+}
+.reveal-right {
+  transform: translateX(60px);
+}
+.reveal-right-far {
+  transform: translateX(120px);
+}
+/* Hero "rise": longer travel and a softer, slower ease. */
+.reveal-rise {
+  transform: translateY(70px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Chinese and Burmese: no synthetic italics, and room for Burmese stacked vowels and tones. */
+:lang(zh) .italic,
+:lang(my) .italic {
+  font-style: normal;
+}
+:lang(my) body {
+  line-height: 1.8;
+}
+:lang(my) :is(h1, h2, h3, blockquote) {
+  line-height: 1.5 !important;
+}
+:lang(my) .uppercase,
+:lang(zh) .uppercase {
+  letter-spacing: 0.05em;
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
